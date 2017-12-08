@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<include file="struts-default.xml"></include>
+	<package name="default" extends="struts-default">
+		<interceptors>
+			<!-- 定义了一个名为myFilter的拦截器 -->
+			<interceptor name="myFilter" class="org.tool.MyFilter"/>
+		</interceptors>
+		<!-- 全局跳转，凡名为login的都跳转到login.jsp -->
+		<global-results>
+			<result name="login">/login.jsp</result>
+		</global-results>
+		<!-- 登录 -->
+		<action name="login" class="dlAction">
+			<result name="success">/login_success.jsp</result>
+			<result name="error">/login.jsp</result>
+			<result name="input">/login.jsp</result>
+		</action>
+		<!-- 所有学生信息 -->
+		<action name="xsInfo" class="xsAction">
+   			<result name="success">/xsInfo.jsp</result>
+   			<interceptor-ref name="defaultStack"></interceptor-ref>
+   			<interceptor-ref name="myFilter"/>
+   		</action>
+   		<!-- 进入添加学生界面 -->
+		<action name="addXsView" class="xsAction" method="addXsView">
+			<result name="success">/addXsInfo.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="myFilter"/>
+		</action>
+		<!-- 添加学生 -->
+		<action name="addXs" class="xsAction" method="addXs">
+			<result name="success">/success.jsp</result>
+			<result name="error">/existXs.jsp</result>
+		</action>
+		<!-- 删除学生 -->
+		<action name="deleteXs" class="xsAction" method="deleteXs">
+			<result name="success" >/success.jsp</result>
+			<result name="error" >/fail.jsp</result>
+		</action>
+		<!-- 进入修改学生界面 -->
+		<action name="updateXsView" class="xsAction" method="updateXsView">
+			<result name="success">/updateXsView.jsp</result>
+		</action>
+		<!-- 修改学生信息 -->
+		<action name="updateXs" class="xsAction" method="updateXs">
+			<result name="success">/success.jsp</result>
+		</action>
+		<!-- 某个学生详细信息 -->
+		<action name="findXs" class="xsAction" method="findXs">
+			<result name="success">/moretail.jsp</result>
+		</action>
+   		<action name="getImage" class="xsAction" method="getImage">
+   		</action>
+   		<!-- 进入添加课程信息页面 -->
+   		<action name="addKcView">
+   			<result>/addKcInfo.jsp</result>
+   			<interceptor-ref name="defaultStack"></interceptor-ref>
+   			<interceptor-ref name="myFilter"></interceptor-ref>
+   		</action>
+	   	<!-- 所有课程信息 -->
+		<action name="kcInfo" class="kcAction" method="kcInfo">
+			<result name="success">/kcInfo.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="myFilter"/>
+		</action>
+		<!-- 查询某门课程 -->
+		<action name="findKc" class="kcAction" method="findKc">
+			<result name="success">/oneKc.jsp</result>
+			<result name="error">/noKc.jsp</result>
+		</action>
+		<!-- 删除课程 -->
+		<action name="deleteKc" class="kcAction" method="deleteKc">
+			<result name="success">/success.jsp</result>
+			<result name="error">/fail.jsp</result>
+		</action>
+		<!-- 添加课程 -->
+		<action name="addKc" class="kcAction" method="addKc">
+			<result name="success">/success.jsp</result>
+			<result name="error">/fail.jsp</result>
+		</action>
+		<!-- 进入修改课程界面 -->
+		<action name="updateKcView" class="kcAction" method="updateKcView">
+			<result name="success">/updateKcView.jsp</result>
+		</action>
+		<!-- 修改课程信息 -->
+		<action name="updateKc" class="kcAction" method="updateKc">
+			<result name="success">/success.jsp</result>
+			<result name="error">/updateKcView.jsp</result>
+		</action>
+		<!-- 进入添加或修改学生成绩界面 -->
+		<action name="addXscjView" class="cjAction">
+   			<result name="success">/addCj.jsp</result>
+   			<interceptor-ref name="defaultStack"></interceptor-ref>
+   			<interceptor-ref name="myFilter"/>
+   		</action>
+   		<!-- 所有学生成绩 -->
+		<action name="xscjInfo" class="cjAction" method="xscjInfo">
+			<result name="success">/xscjInfo.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="myFilter"/>
+		</action>
+   		<!-- 添加或修改学生成绩 -->
+   		<action name="addorupdateXscj" class="cjAction" method="addorupdateXscj">
+   			<result name="success">/success.jsp</result>
+   		</action>
+   		<!-- 某学生课程成绩 -->
+		<action name="findXscj" class="cjAction" method="findXscj">
+			<result name="success">/oneXscj.jsp</result>
+			<result name="error">/noXscj.jsp</result>
+		</action>
+		<!-- 删除某学生的某门成绩 -->
+		<action name="deleteOneXscj" class="cjAction" method="deleteOneXscj">
+			<result name="success">/success.jsp</result>
+		</action>
+	</package>
+</struts>
